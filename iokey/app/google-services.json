@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "127930545075",
+    "firebase_url": "https://iokey-a365f.firebaseio.com",
+    "project_id": "iokey-a365f",
+    "storage_bucket": "iokey-a365f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127930545075:android:24a19a157d180325",
+        "android_client_info": {
+          "package_name": "com.example.arashis.iokey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127930545075-73hfrih7as4q1vtim6uo2jcnqrmmjisq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYcdlvdQBLZWwdYcpORkPldCzMG887oMM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
