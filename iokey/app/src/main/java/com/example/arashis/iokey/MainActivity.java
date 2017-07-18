@@ -11,10 +11,14 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.IntegerRes;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
@@ -24,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private String longtitude;
     private String homeLatitude;
     private String homeLongtitude;
+
+    private int[] rangevalue = {10};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,9 +158,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         latitude = String.valueOf(location.getLatitude());
         longtitude = String.valueOf(location.getLongitude());
         Log.d("d",latitude + longtitude);
-        if(status.equals("Open")){
-            if (Math.abs(Float.valueOf(latitude) - Float.valueOf(homeLatitude)) > 0.0001 || Math.abs(Float.valueOf(longtitude) - Float.valueOf(homeLongtitude)) > 0.0001){
+        if(!status.equals(null)) {
+            if (status.equals("Open")) {
+                if (Math.abs(Float.valueOf(latitude) - Float.valueOf(homeLatitude)) >= 0.000008983148616 * Float.valueOf(rangevalue[0]) || Math.abs(Float.valueOf(longtitude) - Float.valueOf(homeLongtitude)) >= 0.000010966382364 * Float.valueOf(rangevalue[0])) {
                     sendNotification();
+                }
             }
         }
     }
@@ -224,8 +234,62 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         })
                         .show();
                 return true;
+            case R.id.action_settingsrange:
+
+                final View dialog_setrange = getLayoutInflater().inflate(R.layout.dialog_setrange, null);
+                final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                        .setView(dialog_setrange)
+                        .show();
+
+                final TextView trange = (TextView) dialog_setrange.findViewById(R.id.text_range);
+                final SeekBar srange = (SeekBar) dialog_setrange.findViewById(R.id.seekbar_range);
+                rangevalue[0] = 10;
+
+
+                srange.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        // TODO Auto-generated method stub
+                        progress = ((int)Math.round(progress/10 ))*10;
+                        seekBar.setProgress(progress);
+                        rangevalue[0] = srange.getProgress() + 10;
+                        trange.setText(Integer.toString(rangevalue[0]) + "m");
+                    }
+                });
+
+                dialog_setrange.findViewById(R.id.open_camera).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setRangeNotify();
+                        dialog.dismiss();
+                    }
+                });
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void setRangeNotify(){
+        final CoordinatorLayout layout2 = (CoordinatorLayout) findViewById(R.id.root);
+
+        Snackbar.make(layout2, "set notification range " + Integer.toString(rangevalue[0]) + "m" , Snackbar.LENGTH_SHORT)
+                        .setAction("", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Log.d("Snackbar.onClick", "UNDO Clicked");
+                            }
+                        })
+                        .show();
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_range"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="10m"
+        android:textSize="18dp"
+        android:layout_margin="20dp"
+        android:textColor="#777777"/>
+
+
+    <SeekBar
+        android:id="@+id/seekbar_range"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:max="490" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#777777"/>
+    <Button
+        android:id="@+id/open_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#777777"
+        android:clickable="true"
+        android:background="#FFFFFF"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="OK" />
+
+
+</LinearLayout>
