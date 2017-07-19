@@ -1,0 +1,34 @@
++                   //Echo on
+ - Echo On
+D                  //Device Info
+ - BTA=XXXXXXXXXXXX
+ - Name=RNXXXX
+ - Connected=no
+ - Bonded=no
+ - Server Service=80000000
+ - Features=20000000
+ - TxPower=4
+V                  //Device version
+ - MCHP BTLE v1.23.5 8/7/2015
+SF,1               //Set initial configuration
+SS,00000001        //Setting to use user defined private profile
+SR,20000000        //Set as peripheral
+PZ                 //Initialize the user defined 
+PS,123456789012345678901234567890FF //Set UUID of private service (properly set by yourself)
+PC,12345678901234567890123456789011,02,01  //Characteristic for digital port, for reading, specify 1 byte
+R,1     //Reboot
++         //Echo on
+ - Echo On
+LS        //Service confirmation
+ - 123456789012345678901234567890FF
+   - 12345678901234567890123456789011,000D,02
+WC        // Script initialization
+WW        // Script input mode, user-defined script input from the next line
+@PW_ON
+A               //Advertisement started
+%000D = |I,02   //Associate PIO2 with handle 0x000D
+@DISCON
+A
+//Entering the ESC key here exits the script entry mode
+SR,01000000   //Set to run the script after startup
+R,1           //Reboot
