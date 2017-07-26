@@ -17,8 +17,8 @@ public class KeyAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private ArrayList<String> mStatusArray = new ArrayList<String>() {{add("Open"); add("Lock"); add("Open"); add("Lock"); add("Open"); add("Lock"); add("Open"); add("Lock");}};
-    private ArrayList<String> mTimeArray = new ArrayList<String>() {{add("7/14  12:12:12"); add("7/14  12:12:12");add("7/14  12:12:12");add("7/14  12:12:12");add("7/14  12:12:12");add("7/14  12:12:12");add("7/14  12:12:12");add("7/14  12:12:12");}};
+    private ArrayList<String> mStatusArray = new ArrayList<String>() {{add("Open"); add("Lock"); add("Open"); add("Lock"); add("Open"); add("Lock"); }};
+    private ArrayList<String> mTimeArray = new ArrayList<String>() {{add("7/25  12:15:12"); add("7/25  12:15:50");add("7/25  21:33:02");add("7/25  21:33:15");add("7/26  08:05:45");add("7/26  08:06:10");}};
     private static class ViewHolder {
         public TextView statusView;
         public TextView  timeView;

@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private String homeLatitude;
     private String homeLongtitude;
 
-    private int[] rangevalue = {10};
+    private int[] rangevalue = {1000};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
